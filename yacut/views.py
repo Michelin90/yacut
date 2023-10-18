@@ -36,8 +36,7 @@ def add_url_map() -> str:
         db.session.add(url_map)
         db.session.commit()
         flash(url_for(
-            'follow_url_map', short=url_map.short, _external=True
-            ), 'link'
+            'follow_url_map', short=url_map.short, _external=True), 'link'
         )
         return render_template('index.html', form=form)
     return render_template('index.html', form=form)
