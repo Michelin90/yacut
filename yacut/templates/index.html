@@ -36,19 +36,12 @@
                         <span style="color: red">{{ error }}</span>
                       {% endfor %}
                     {% endif %}                   
-                    {% with messages = get_flashed_messages(category_filter=["too_long"]) %}
+                    {% with messages = get_flashed_messages(category_filter=["non-unique"]) %}
                       {% if messages %}
                         {% for message in messages %}
                           <span style="color:red">{{ message}}</span>
                         {% endfor %}
                       {% endif %}
-                    {% endwith %}
-                      {% with messages = get_flashed_messages(category_filter=["non-unique"]) %}
-                        {% if messages %}
-                          {% for message in messages %}
-                            <span style="color:red">{{ message}}</span>
-                          {% endfor %}
-                        {% endif %}
                     {% endwith %}
                   </p>
                 </div>
