@@ -15,7 +15,10 @@ class UrlForm(FlaskForm):
         'Ваш вариант короткой ссылки',
         validators=[
             Optional(),
-            Regexp(regex=r'^[A-za-z0-9]{1,16}$')
+            Regexp(
+                regex=r'^[A-Za-z0-9]{1,16}$',
+                message='Указано недопустимое имя для короткой ссылки.'
+            )
         ]
     )
     submit = SubmitField('Создать')

@@ -1,5 +1,3 @@
-import re
-
 from flask import flash, redirect, render_template, url_for
 from werkzeug.wrappers.response import Response
 
@@ -12,13 +10,6 @@ from .models import URLMap
 def add_url_map() -> str:
     form = UrlForm()
     custom_id = form.custom_id.data
-    pattern = r'^[A-Za-z0-9]{1,16}$'
-    if custom_id and not re.match(pattern, custom_id):
-        flash(
-            'Указано недопустимое имя для короткой ссылки.',
-            'too_long'
-        )
-        return render_template('index.html', form=form)
     if URLMap.query.filter_by(short=custom_id).first():
         flash(
             'Предложенный вариант короткой ссылки уже существует.',
@@ -29,7 +20,7 @@ def add_url_map() -> str:
         url_map = URLMap(
             original=form.original_link.data,
             short=(
-                form.custom_id.data if form.custom_id.data
+                custom_id if custom_id
                 else URLMap.get_unique_short_id()
             )
         )
