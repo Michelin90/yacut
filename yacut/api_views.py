@@ -1,4 +1,5 @@
 import re
+from http import HTTPStatus
 
 from flask import jsonify, request
 from flask.wrappers import Response
@@ -12,8 +13,8 @@ from .models import URLMap
 def get_url(short_id: str) -> tuple[Response, int]:
     url_map = URLMap.query.filter_by(short=short_id).first()
     if not url_map:
-        raise InvalidAPIUsage('Указанный id не найден', 404)
-    return jsonify({'url': url_map.to_dict().get('original')}), 200
+        raise InvalidAPIUsage('Указанный id не найден', HTTPStatus.NOT_FOUND)
+    return jsonify({'url': url_map.to_dict().get('original')}), HTTPStatus.OK
 
 
 @app.route('/api/id/', methods=['POST'])
@@ -44,4 +45,4 @@ def create_url_map() -> tuple[Response, int]:
     return jsonify({
         'url': to_dict.get('original'),
         'short_link': 'http://localhost/' + to_dict.get('short')
-    }), 201
+    }), HTTPStatus.CREATED
