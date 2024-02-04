@@ -34,9 +34,9 @@ class URLMap(db.Model):
         )
 
     def from_dict(self, data: dict[str, str]) -> None:
-        API_COLUMN_MAPPING = {
+        api_column_mapping = {
             'url': 'original',
             'custom_id': 'short'
         }
         for field in ['url', 'custom_id']:
-            setattr(self, API_COLUMN_MAPPING[field], data[field])
+            setattr(self, api_column_mapping[field], data[field])

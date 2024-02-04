@@ -1,7 +1,7 @@
 from typing import Optional
 
 
-class InvalidAPIUsage(Exception):
+class InvalidAPIUsageError(Exception):
     status_code = 400
 
     def __init__(
