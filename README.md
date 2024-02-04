@@ -47,6 +47,13 @@ python3 -m pip install --upgrade pip
 ```
 pip install -r requirements.txt
 ```
+### Добавить переменные окружения:
+В корневой папке проекта создать файл **.env** и добавить в него следующие строки:
+```
+FLASK_APP=yacut
+FLASK_ENV=development
+SECRET_KEY=<ваш секретный ключ>
+```
 ### Выполнить миграции:
 ```
 flask db upgrade
